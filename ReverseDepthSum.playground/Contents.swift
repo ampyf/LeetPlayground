@@ -17,31 +17,31 @@ qwe
 
 func reverseDepthSum (_ nums:[Any]) -> Int {
     
-    var levels = [[Int]]()
+    var levels = [Int]()
 
     var flatNest = nums
     while flatNest.count > 0 {
-        var arrayForLevel = [Int]()
+        var sumForLevel = 0
         var nextLevel = [[Any]]()
         
         let _ : [String] = flatNest.map {
             if let x = $0 as? Int {
-                arrayForLevel.append(x)
+                sumForLevel += x
             } else if let x = $0 as? [Any] {
                 nextLevel.append(x)
             }
             return ""
         }
         
-        levels.append(arrayForLevel)
+        levels.append(sumForLevel)
         flatNest = flatten(nextLevel)
     }
     
     var total = 0
     let totalLevels = levels.count
-    for i in 0..<levels.count {
+    for i in 0..<totalLevels {
         let weight = totalLevels - i
-        total += levels[i].reduce(0) { $0 + ($1 * weight) }
+        total += levels[i] * weight
     }
     
     return total
@@ -58,4 +58,6 @@ func flatten(_ nums: [[Any]]) -> [Any] {
     return out
 }
 
-reverseDepthSum([[1,1],2,[1,1]])
+print(reverseDepthSum([[1,1],2,[1,1]]))
+print(reverseDepthSum([]))
+print(reverseDepthSum([[[1]]]))
