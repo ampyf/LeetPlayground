@@ -11,15 +11,14 @@ import UIKit
  
  */
 
-struct TwoComp {
-    var x, y, xIdx, yIdx: Int
-    
-    init(fromArray nums:[Int], xIdx:Int, yIdx:Int) {
-        self.x = nums[xIdx]
-        self.xIdx = xIdx
-        self.y = nums[yIdx]
-        self.yIdx = yIdx
+extension Array : Hashable, Equatable {
+    public var hashValue : Int {
+        return self.sorted(by: Self.Iterator.Element).map { return String($0)}.joined(separator: " ").hashValue
     }
+}
+
+public func ==<T>(lhs: [T], rhs: [T]) -> Bool {
+    return lhs.hashValue == rhs.hashValue
 }
 
 

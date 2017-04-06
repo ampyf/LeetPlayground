@@ -8,4 +8,4 @@ var str = "Hello, playground"
 let a = [0,1,2]
 let b = [0, 1, 2]
 
-a == b
+var set = Set<[Int]>()
